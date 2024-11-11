@@ -1,8 +1,13 @@
-name: Check for existing node_modules_cached_tar in s3bucket
+name: Check for existing cache and load 
 description: If node_modules tar file exists in S3, copies it and unzips in working dir
 runs:
+  using: "composite"
   steps:
-    - name: Run copy and install script
+    - name: Set GitHub Path
+      run: echo "$GITHUB_ACTION_PATH" >> $GITHUB_PATH
+      shell: bash
+      env:
+        GITHUB_ACTION_PATH: ${{ github.action_path }}
+    - name: Run confirm and load cache script
       run: harrier-cache-confirm-load.sh
       shell: bash
-      
