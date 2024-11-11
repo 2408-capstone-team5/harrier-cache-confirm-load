@@ -1,0 +1,8 @@
+name: Check for existing node_modules_cached_tar in s3bucket
+description: If node_modules tar file exists in S3, copies it and unzips in working dir
+runs:
+  steps:
+    - name: Run copy and install script
+      run: harrier-cache-confirm-load.sh
+      shell: bash
+      
