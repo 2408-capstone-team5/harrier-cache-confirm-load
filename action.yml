@@ -1,4 +1,4 @@
-name: Check for existing cache and load 
+name: Retrieve latest cache of dependencies, if cache exists and is valid
 description: If node_modules tar file exists in S3, copies it and unzips in working dir
 runs:
   using: "composite"
@@ -8,6 +8,6 @@ runs:
       shell: bash
       env:
         GITHUB_ACTION_PATH: ${{ github.action_path }}
-    - name: Run confirm and load cache script
-      run: harrier-cache-confirm-load.sh
+    - name: Run cache-load, to retrieve latest cache if valid
+      run: harrier-cache-load.sh
       shell: bash
