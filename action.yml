@@ -1,13 +1,10 @@
-name: Retrieve latest cache of dependencies, if cache exists and is valid
-description: If node_modules tar file exists in S3, copies it and unzips in working dir
+name: Retrieve Latest Cache of Dependencies
+description: "This action retrieves and unzips the latest cached dependencies from S3 if a valid node_modules tar file exists, saving installation time."
+author: Harrier Team
+
 runs:
   using: "composite"
   steps:
-    - name: Set GitHub Path
-      run: echo "$GITHUB_ACTION_PATH" >> $GITHUB_PATH
-      shell: bash
-      env:
-        GITHUB_ACTION_PATH: ${{ github.action_path }}
-    - name: Run cache-load, to retrieve latest cache if valid
-      run: harrier-cache-load.sh
+    - name: Run Cache Load Script
+      run: ./harrier-cache-load.sh
       shell: bash
