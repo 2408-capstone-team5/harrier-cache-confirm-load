@@ -3,13 +3,13 @@ description: If node_modules tar file exists in S3, copies it and unzips in work
 runs:
   using: "composite"
   steps:
-    - name: Print environment variables for debugging
-      run: env
-    - name: Ensure script is executable
-      run: chmod +x "${{ github.action_path }}/harrier-cache-load.sh"
+    - name: Set GitHub Path
+      run: echo "$GITHUB_ACTION_PATH" >> $GITHUB_PATH
       shell: bash
+      env:
+        GITHUB_ACTION_PATH: ${{ github.action_path }}
     - name: Run cache-load, to retrieve latest cache if valid
-      run: "${{ github.action_path }}/harrier-cache-load.sh"
+      run: harrier-cache-load.sh
       shell: bash
       env:
         GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
